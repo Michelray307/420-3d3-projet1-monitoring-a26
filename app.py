@@ -20,6 +20,7 @@ class App:
 
         self.label_80_cpu = tk.Label(self.frame_cpu, text="Avertissement 80% CPU", font=("Arial", 12, "bold"), fg="red")
         self.label_80_cpu.pack()
+        
 
         # --- RAM ---
         self.frame_ram = tk.LabelFrame(self.fenetre, text="RAM", padx=10, pady=10)
@@ -100,6 +101,7 @@ class App:
             f.write(ligne)
 
         self.fenetre.after(2000, self.rafraichir)
+        print(ligne)
 
 
 if __name__ == "__main__":
