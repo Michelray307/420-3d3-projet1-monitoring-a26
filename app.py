@@ -114,6 +114,7 @@ class App:
         if self.log_actif:
             with open("monitoring.log", 'a') as f:
                 f.write(ligne)
+        print(ligne)
         self.fenetre.after(2000, self.rafraichir)
   
 
