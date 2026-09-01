@@ -20,7 +20,6 @@ class App:
 
         self.label_80_cpu = tk.Label(self.frame_cpu, text="Avertissement 80% CPU", font=("Arial", 12, "bold"), fg="red")
         self.label_80_cpu.pack()
-        
 
         # --- RAM ---
         self.frame_ram = tk.LabelFrame(self.fenetre, text="RAM", padx=10, pady=10)
@@ -37,9 +36,24 @@ class App:
         self.label_disque.pack()
         self.canvas_disque = tk.Canvas(self.frame_disque, width=300, height=20, bg="white")
         self.canvas_disque.pack()
+        # --- bouton log ---
+        self.log_actif = True
+        self.bouton_log = tk.Button(self.fenetre, text="Désactiver le log", command=self.toggle_log)
+        self.bouton_log.pack(pady=10)
+                
 
         self.rafraichir()
         self.fenetre.mainloop()
+
+    def toggle_log(self):
+        self.log_actif = not self.log_actif
+        if self.log_actif:
+            self.bouton_log.config(text="Désactiver le log")
+        else:
+            self.bouton_log.config(text="Activer le log")
+
+
+     
 
     def rafraichir(self):
         # Lire les métriques
@@ -97,11 +111,14 @@ class App:
             f"RAM: {ram:.1f}% | "
             f"Disque: {disque:.1f}%\n"
         )
-        with open("monitoring.log", 'a') as f:
-            f.write(ligne)
-
+        if self.log_actif:
+            with open("monitoring.log", 'a') as f:
+                f.write(ligne)
         self.fenetre.after(2000, self.rafraichir)
-        print(ligne)
+  
+
+        
+
 
 
 if __name__ == "__main__":
