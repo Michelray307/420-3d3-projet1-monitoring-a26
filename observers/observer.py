@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
-class observer(ABC):
+
+class Observateur(ABC):
     @abstractmethod
     def actualiser(self, sujet) -> None:
         pass
